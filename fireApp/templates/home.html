@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+{% load leaflet_tags %}
+<html lang="en">
+  <head>
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="{% static '../static/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Mapa de Incendios en la Provincia de Cordoba</title>
+  </head>
+  <body>
+    <div class="full-map-alert {% if context.bo %} full-map {% endif %}">
+      {% leaflet_map "cba-map" %}
+    </div>
+    <script>
+      $(function () {
+        var mymap = L.map('cba-map');
+      });
+    </script>
+  </body>
+</html>
