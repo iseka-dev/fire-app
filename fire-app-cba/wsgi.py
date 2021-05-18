@@ -1,5 +1,5 @@
 """
-WSGI config for fire-map-cba project.
+WSGI config for fire-app-cba project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ["DJANGO_SETTINGS_MODULE"] = "fire-map-cba.settings"
+os.environ["DJANGO_SETTINGS_MODULE"] = "fire-app-cba.settings"
 
 application = get_wsgi_application()

@@ -1,5 +1,5 @@
 """
-ASGI config for fire-map-cba project.
+ASGI config for fire-app-cba project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fire-map-cba.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fire-app-cba.settings')
 
 application = get_asgi_application()
