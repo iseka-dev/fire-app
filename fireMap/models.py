@@ -52,4 +52,5 @@ class Incendio(models.Model):
     unid_pesadas_afectadas = models.IntegerField()
     caracteristica = models.CharField(max_length=50)
     estado = models.CharField(max_length=50)
+    activo = models.BooleanField() # marcador para mapa
     riesgo_interfase = models.BooleanField()
