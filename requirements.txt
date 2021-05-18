@@ -1,0 +1,14 @@
+asgiref @ file:///home/conda/feedstock_root/build_artifacts/asgiref_1605523041333/work
+certifi==2020.12.5
+dj-database-url==0.5.0
+Django @ file:///home/conda/feedstock_root/build_artifacts/django_1613732694779/work
+django-heroku==0.3.1
+django-leaflet @ file:///home/conda/feedstock_root/build_artifacts/django-leaflet_1596309434036/work
+djangorestframework @ file:///home/conda/feedstock_root/build_artifacts/djangorestframework_1616757768152/work
+gunicorn @ file:///home/conda/feedstock_root/build_artifacts/gunicorn_1620734326877/work
+psycopg2 @ file:///home/conda/feedstock_root/build_artifacts/psycopg2_1614021014550/work
+pydot==1.4.1
+pyparsing==2.4.7
+pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1612179539967/work
+sqlparse @ file:///home/conda/feedstock_root/build_artifacts/sqlparse_1602142927465/work
+whitenoise @ file:///home/conda/feedstock_root/build_artifacts/whitenoise_1602596638218/work
