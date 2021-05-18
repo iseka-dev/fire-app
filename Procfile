@@ -1,1 +1,1 @@
-web: python manage.py runserver
+web: gunicorn fire-app-cba.wsgi:application --log-file -
