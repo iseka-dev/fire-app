@@ -25,4 +25,16 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('fireMap.urls')),
     path('mobile/', include('mobile.urls')),
+    path(
+        'login/',
+        auth_views.LoginView.as_view(
+            template_name=os.path.join(BASE_DIR, 'templates/login.html'),
+        )
+    ),
+    path(
+        'logout/',
+        auth_views.LogoutView.as_view(
+            template_name=os.path.join(BASE_DIR, 'templates/logout.html'),
+        )
+    ),
 ]
