@@ -1,1 +1,1 @@
-web:gunicorn dashboard.wsgi
+web:gunicorn fire-app-cba.wsgi --log-file -
