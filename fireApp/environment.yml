@@ -13,6 +13,7 @@ dependencies:
   - django=3.1.7=pyhd8ed1ab_0
   - django-heroku=0.3.1=pyh8c360ce_0
   - django-leaflet=0.27.1=pyh9f0ad1d_0
+  - djangorestframework=3.12.4=pyhd8ed1ab_0
   - geos=3.9.1=h9c3ff4c_2
   - gunicorn=20.1.0=py38h578d9bd_0
   - krb5=1.17.2=h926e7f8_0
