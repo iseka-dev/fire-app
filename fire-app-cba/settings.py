@@ -134,7 +134,7 @@ STATICFILES_DIRS = [
 
 LOGIN_URL = 'login/'
 
-LOGIN_REDIRECT_URL = '../fireMap/'
+LOGIN_REDIRECT_URL = '../'
 
 LEAFLET_CONFIG = {
     'SPATIAL_EXTENT': (-66, -35, -62, -30),
