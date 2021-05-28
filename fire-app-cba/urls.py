@@ -23,7 +23,7 @@ import os
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', include('fireMap.urls')),
+    path('', include('fireMap.urls')),
     path('mobile/', include('mobile.urls')),
     path(
         'login/',

@@ -1,14 +1,41 @@
-asgiref @ file:///home/conda/feedstock_root/build_artifacts/asgiref_1605523041333/work
-certifi==2020.12.5
-dj-database-url==0.5.0
-Django @ file:///home/conda/feedstock_root/build_artifacts/django_1613732694779/work
-django-heroku==0.3.1
-django-leaflet @ file:///home/conda/feedstock_root/build_artifacts/django-leaflet_1596309434036/work
-djangorestframework @ file:///home/conda/feedstock_root/build_artifacts/djangorestframework_1616757768152/work
-gunicorn==20.1.0
-psycopg2 @ file:///home/conda/feedstock_root/build_artifacts/psycopg2_1614021014550/work
-pydot==1.4.1
-pyparsing==2.4.7
-pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1612179539967/work
-sqlparse @ file:///home/conda/feedstock_root/build_artifacts/sqlparse_1602142927465/work
-whitenoise @ file:///home/conda/feedstock_root/build_artifacts/whitenoise_1602596638218/work
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: linux-64
+_libgcc_mutex=0.1=conda_forge
+_openmp_mutex=4.5=1_gnu
+asgiref=3.3.1=pyhd8ed1ab_0
+ca-certificates=2020.12.5=ha878542_0
+certifi=2020.12.5=py38h578d9bd_1
+dj-database-url=0.5.0=py_0
+django=3.1.7=pyhd8ed1ab_0
+django-heroku=0.3.1=pyh8c360ce_0
+django-leaflet=0.27.1=pyh9f0ad1d_0
+djangorestframework=3.12.4=pyhd8ed1ab_0
+geos=3.9.1=h9c3ff4c_2
+gunicorn=20.1.0=py38h578d9bd_0
+krb5=1.17.2=h926e7f8_0
+ld_impl_linux-64=2.35.1=hea4e1c9_2
+libedit=3.1.20191231=he28a2e2_2
+libffi=3.3=h58526e2_2
+libgcc-ng=9.3.0=h2828fa1_18
+libgomp=9.3.0=h2828fa1_18
+libpq=13.1=hfd2b0eb_2
+libstdcxx-ng=9.3.0=h6de172a_18
+ncurses=6.2=h58526e2_4
+openssl=1.1.1k=h7f98852_0
+pip=21.0.1=pyhd8ed1ab_0
+proj4=6.1.1=hc80f0dc_1
+psycopg2=2.8.6=py38h497a2fe_2
+python=3.8.10=hffdb5ce_0_cpython
+python_abi=3.8=1_cp38
+pytz=2021.1=pyhd8ed1ab_0
+readline=8.0=he28a2e2_2
+setuptools=49.6.0=py38h578d9bd_3
+sqlite=3.35.5=h74cdb3f_0
+sqlparse=0.4.1=pyh9f0ad1d_0
+tk=8.6.10=h21135ba_1
+tzdata=2021a=he74cb21_0
+wheel=0.36.2=pyhd3deb0d_0
+whitenoise=5.2.0=py_0
+xz=5.2.5=h516909a_1
+zlib=1.2.11=h516909a_1010
