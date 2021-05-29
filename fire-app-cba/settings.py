@@ -24,12 +24,11 @@ dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'j#=ra*m%^g9_vpkdjlm@y6901&+xn#xcdopxmu!sm(xj!nrf3s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '*',
