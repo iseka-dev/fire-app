@@ -24,6 +24,7 @@ dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'j#=ra*m%^g9_vpkdjlm@y6901&+xn#xcdopxmu!sm(xj!nrf3s'
 
@@ -95,11 +96,11 @@ WSGI_APPLICATION = 'fire-app-cba.wsgi.application'
     'PORT': '5432',
 }"""
 
-
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
-DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+if not os.path.isfile(dotenv_file):
+    DATABASES = {}
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+    DATABASE_URL = os.environ['DATABASE_URL']
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 
 # Password validation
@@ -163,5 +164,6 @@ LEAFLET_CONFIG = {
 
 django_heroku.settings(locals())
 
-options = DATABASES['default'].get('OPTIONS', {})
-options.pop('sslmode', None)
+if not os.path.isfile(dotenv_file):
+    options = DATABASES['default'].get('OPTIONS', {})
+    options.pop('sslmode', None)
