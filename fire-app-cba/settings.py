@@ -87,20 +87,10 @@ WSGI_APPLICATION = 'fire-app-cba.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-"""'default': {
-    'ENGINE': 'django.contrib.gis.db.backends.postgis',
-    'NAME': 'bomberos',
-    'USER': 'postgres',
-    'PASSWORD': 'postgres',
-    'HOST': '127.0.0.1',
-    'PORT': '5432',
-}"""
-
-if not os.path.isfile(dotenv_file):
-    DATABASES = {}
-    DATABASES['default'] = dj_database_url.config(conn_max_age=600)
-    DATABASE_URL = os.environ['DATABASE_URL']
-    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 
 # Password validation
@@ -164,6 +154,5 @@ LEAFLET_CONFIG = {
 
 django_heroku.settings(locals())
 
-if not os.path.isfile(dotenv_file):
-    options = DATABASES['default'].get('OPTIONS', {})
-    options.pop('sslmode', None)
+options = DATABASES['default'].get('OPTIONS', {})
+options.pop('sslmode', None)
