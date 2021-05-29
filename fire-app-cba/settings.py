@@ -15,14 +15,9 @@ import os
 import django_heroku
 import dj_database_url
 import psycopg2
-import dotenv
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'j#=ra*m%^g9_vpkdjlm@y6901&+xn#xcdopxmu!sm(xj!nrf3s'
