@@ -81,8 +81,7 @@ WSGI_APPLICATION = 'fire-app-cba.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
-DATABASE_URL = os.environ['DATABASE_URL']
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 
