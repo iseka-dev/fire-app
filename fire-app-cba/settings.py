@@ -83,7 +83,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'fire-app-cba.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
