@@ -12,9 +12,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 # from pathlib import Path
 import os
-import django_heroku
-import dj_database_url
-import psycopg2
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,6 +29,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,13 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'leaflet',
     'fireMap',
-    'mobile'
+    'mobile',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -77,10 +74,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'fire-app-cba.wsgi.application'
 
+# Channels
+
+# ASGI_APPLICATION = 'fire-app-cba.routing.application'
+
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'bomberos',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -119,13 +130,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGIN_URL = 'login/'
+
 LOGIN_REDIRECT_URL = '../'
 
 LEAFLET_CONFIG = {
@@ -140,9 +153,3 @@ LEAFLET_CONFIG = {
         })
     ]
 }
-
-django_heroku.settings(locals())
-
-DATABASE_URL = 'postgis://mvonrtfgaovwhi:90178b0dfa0872aff5205fcb273795305ff939ca30a39da7cbc592e544389898@ec2-54-167-152-185.compute-1.amazonaws.com:5432/dc5g3h5n0ps3nl'
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
