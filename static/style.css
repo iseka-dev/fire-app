@@ -138,8 +138,23 @@ span span {
 }
 
 .menu-list {
-  margin-top: 15%;
+  position: absolute;
+  margin-top: 18%;
   opacity: 80%;
+  width: 85%;
+  right: 0%;
+  display: none;
+}
+
+.right-aligned {
+  text-align: right;
+}
+
+.collapsible-body {
+  background-color: #eceff1;
+}
+
+.collapsible-header {
   direction: rtl;
 }
 

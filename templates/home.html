@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Mapa de Incendios en la Provincia de Cordoba</title>
     <link rel="stylesheet" type="text/css" href="{% static '../static/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -50,12 +51,12 @@
             </span>
           </div>
           <div class="isolated-item">
-            <a class="btn-floating btn-large waves-effect waves-light red">
+            <a class="btn-floating btn-large waves-effect waves-light red" id="menu-btn" onclick="toggleFunction">
               <i class="material-icons">local_fire_department</i>
             </a>
           </div>
         </div>
-        <div class="menu-list">
+        <div class="menu-list" id="menu-list-id">
           <ul class="collapsible">
             <li>
               <div class="collapsible-header">Pronostico WRF</div>
@@ -92,7 +93,7 @@
                 https://www.windy.com/es/-Rachas-de-viento-gust?gust,-31.182,-63.776,8
                 ">
                   https://www.windy.com/es/-Rachas-de-viento-gust?gust,-31.182,-63.776,8
-                </a
+                </a>
               </div>
             </li>
             <li>
@@ -110,15 +111,18 @@
       </div>
     </div>
     <script>
-      $(function () {
-        var mymap = L.map('cba-map');
-      });
-    </script>
-    <script>
       document.addEventListener('DOMContentLoaded', function() {
         var elems = document.querySelectorAll('.collapsible');
         var instances = M.Collapsible.init(elems, {
-          // specify options here
+        });
+      });
+    </script>
+    <script>
+    </script>
+    <script>
+      $(document).ready(function(){
+        $("#menu-btn").click(function() {
+          $("#menu-list-id").toggle();
         });
       });
     </script>
