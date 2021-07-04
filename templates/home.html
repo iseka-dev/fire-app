@@ -13,6 +13,7 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- Compiled and minified JavaScript for Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </head>
   <body>
@@ -26,10 +27,34 @@
       </div>
       <div class="fires-container">
         {% for fire in fires %}
-        <div class="fire-card card-panel orange lighten-4">
-          {{ fire }}
-        </div>
+          <div class="fire-card orange lighten-4 z-depth-1">
+            <span class="fire-header">Informacion de Incendio en </br>{{ fire.cuarteles_afectados.nombre }}</br></span>
+            <ul class="fire-data">
+              <li>Hora de Inicio: {{ fire.fecha_hora_inicio }} </li>
+              <li>Extension: {{ fire.radio }}</li>
+              <li>Caracteristica: {{ fire.caracteristica }}</li>
+              <li>Cuartel/es Afectado/s: {{ fire.cuarteles_afectados.nombre }}</li>
+              <li>Estado: {{ fire.estado }}</li>
+              <li>Bomberos: {{ fire.bomberos_afectados }} </li>
+              <li>Unindades Livianas: {{ fire.unid_livianas_afectadas }} </li>
+              <li>Unidades Pesadas: {{ fire.unid_pesadas_afectadas }}</li>
+            </ul>
+          </div>
         {% endfor %}
+      </div>
+      <div class="menu-container">
+        <div class="menu-header">
+          <div class="isolated-item username-box red z-depth-1">
+            <span class="username">
+              Usuario: <b>{{ request.user.username }}</b>
+            </span>
+          </div>
+          <div class="isolated-item">
+            <a class="btn-floating btn-large waves-effect waves-light red">
+              <i class="material-icons">local_fire_department</i>
+            </a>
+          </div>
+        </div>
       </div>
       <div class="logos-container">
         <img src="{% static 'img/logos/logo_planFuego.png' %}" alt="Plan Provincial de Manejo contra el Fuego">
