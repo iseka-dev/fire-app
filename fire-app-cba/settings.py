@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'fire-app-cba.wsgi.application'
 
 # Channels
 
-# ASGI_APPLICATION = 'fire-app-cba.routing.application'
+ASGI_APPLICATION = 'fire-app-cba.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
