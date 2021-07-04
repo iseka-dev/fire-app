@@ -1,6 +1,6 @@
 {% load static %}
-<!DOCTYPE html>
 {% load leaflet_tags %}
+<!DOCTYPE html>
 <html lang="en">
   <head>
     {% leaflet_js %}
@@ -12,9 +12,15 @@
     <title>Mapa de Incendios en la Provincia de Cordoba</title>
   </head>
   <body>
-    <div class="full-map-alert {% if context.bo %} full-map {% endif %}">
+    {% if bo %}
+    <div class="full-map-alert">
+    {% else %}
+    <div class="full-map">
+    {% endif %}
       {% leaflet_map "cba-map" %}
     </div>
+    <div>
+    <div>
     <script>
       $(function () {
         var mymap = L.map('cba-map');

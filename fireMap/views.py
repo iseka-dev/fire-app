@@ -4,16 +4,13 @@ from .models import Incendio
 
 
 class FireMap(TemplateView):
-
-    template_name = "home.html"
+    template_name = "../templates/home.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         fires = Incendio.objects.filter(activo=True)
-        print(len(fires))
         if len(fires) > 0:
             context['bo'] = True
             context['fires'] = fires
-        else:
-            context['bo'] = False
+            print(len(fires))
         return context

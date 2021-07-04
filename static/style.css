@@ -21,8 +21,8 @@ h2 {
 }
 
 .full-map-alert {
-    border: 15px solid;
-    animation: alert 1s infinite;
+    border: 15px solid red;
+    animation: alert 1s infinite !important;
 }
 
 .login-header-container {
