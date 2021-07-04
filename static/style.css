@@ -8,6 +8,25 @@ h2 {
   color: #006d59;
 }
 
+a {
+  overflow-wrap: break-word;
+}
+
+span span {
+    animation: blur 2s ease-out infinite;
+}
+
+.collapsible-header {
+  align-items: right;
+}
+
+.login-header-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  align-content: flex-start;
+  margin-top: 10%;
+}
+
 @keyframes alert {
     0%   { border-color: #F7B902; }
     50%  { border-color: #F30202; }
@@ -18,35 +37,125 @@ h2 {
 .full-map {
     max-height: 55% !important;
     border: 15px solid green;
+    position: relative;
 }
 
 .full-map-alert {
-    border: 15px solid;
-    animation: alert 1s infinite;
+    border: 15px solid red;
+    animation: alert 1s infinite !important;
+    position: relative;
 }
 
-.login-header-container {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  align-content: flex-start;
-  margin-top: 10%;
-}
 
 .leaflet-map {
   max-height: 50%;
 }
 
-#logos-container-login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.fires-container {
+  position: absolute;
+  z-index: 10;
+  left: 8%;
+  top: 15%;
+  width: 22%;
+  max-height: 75%;
+  overflow-y: auto;
+  padding: 5px;
+  direction: rtl;
 }
 
-#logos-container-login img {
+.fire-card {
+  background-color: #ffe0b2;
+  font-style: 'Roboto';
+  font-size: 12pt;
+  opacity: 80%;
+  padding: 1em;
+  margin-top: 4px;
+  direction: ltr;
+}
+
+@keyframes blur {
+  from {
+    text-shadow:0px 0px 2px #fff,
+      0px 0px 2px #fff,
+      0px 2px 5px #fff,
+      0px 5px 10px red,
+      0px -5px 10px red;
+  }
+}
+
+.menu-container {
+  position: absolute;
+  z-index: 10;
+  right: 8%;
+  top: 15%;
+  width: 20%;
+}
+
+.menu-header {
+  display: flex;
+  align-content: flex-end;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.isolated-item {
+  margin-left: 6%;
+  margin-right: 6%;
+}
+
+.logos-container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5%;
+  z-index: 10;
+  right: 5%;
+  bottom: 8%;
+  width: 15%;
+  height: 12%;
+}
+
+.logos-container img {
   max-width: 60%;
   max-height: 60%;
   padding: 2%;
+}
+
+.username {
+  font-size: 14pt;
+  font: 'Roboto';
+  color: white;
+}
+
+.username-box {
+  padding: 7px 15px;
+  border-radius: 5px;
+}
+
+.fire-data li {
+  font-size: 11pt;
+}
+
+.menu-list {
+  position: absolute;
+  margin-top: 18%;
+  opacity: 80%;
+  width: 85%;
+  right: 0%;
+  display: none;
+}
+
+.right-aligned {
+  text-align: right;
+}
+
+.collapsible-body {
+  background-color: #eceff1;
+}
+
+.collapsible-header {
+  direction: rtl;
 }
 
 #login-container {
@@ -60,4 +169,5 @@ h2 {
   min-height: calc(100vh - 30px);
   max-height: calc(100vh - 30px);
   width: 100%;
+  z-index: 0;
 }
