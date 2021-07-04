@@ -7,9 +7,13 @@
     {% leaflet_css %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" type="text/css" href="{% static '../static/style.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <title>Mapa de Incendios en la Provincia de Cordoba</title>
+    <link rel="stylesheet" type="text/css" href="{% static '../static/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript for Materialize CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </head>
   <body>
     {% if bo %}
@@ -17,10 +21,23 @@
     {% else %}
     <div class="full-map">
     {% endif %}
-      {% leaflet_map "cba-map" %}
+      <div>
+        {% leaflet_map "cba-map" %}
+      </div>
+      <div class="fires-container">
+        {% for fire in fires %}
+        <div class="fire-card card-panel orange lighten-4">
+          {{ fire }}
+        </div>
+        {% endfor %}
+      </div>
+      <div class="logos-container">
+        <img src="{% static 'img/logos/logo_planFuego.png' %}" alt="Plan Provincial de Manejo contra el Fuego">
+        <img src="{% static 'img/logos/logo_secretaria.png' %}" alt="Secreataria Catastrofes">
+        <img src="{% static 'img/logos/logo_gobCBA.png' %}" alt="Gobierno de Cordoba">
+        <img src="{% static 'img/logos/ppmf.png' %}" alt="Plan Provincial de Manejo contra el Fuego2">
+      </div>
     </div>
-    <div>
-    <div>
     <script>
       $(function () {
         var mymap = L.map('cba-map');

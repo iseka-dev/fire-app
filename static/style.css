@@ -8,6 +8,13 @@ h2 {
   color: #006d59;
 }
 
+.login-header-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  align-content: flex-start;
+  margin-top: 10%;
+}
+
 @keyframes alert {
     0%   { border-color: #F7B902; }
     50%  { border-color: #F30202; }
@@ -18,32 +25,52 @@ h2 {
 .full-map {
     max-height: 55% !important;
     border: 15px solid green;
+    position: relative;
 }
 
 .full-map-alert {
     border: 15px solid red;
     animation: alert 1s infinite !important;
+    position: relative;
 }
 
-.login-header-container {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  align-content: flex-start;
-  margin-top: 10%;
-}
 
 .leaflet-map {
   max-height: 50%;
 }
 
-#logos-container-login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.fires-container {
+  position: absolute;
+  z-index: 10;
+  left: 5%;
+  top: 10%;
+  width: 15%;
+  margin-top: 10%;
+  margin-left: 10%;
 }
 
-#logos-container-login img {
+.menu-container {
+  position: absolute;
+  z-index: 10;
+}
+
+.fire-card {
+}
+
+.logos-container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5%;
+  z-index: 10;
+  right: 5%;
+  bottom: 8%;
+  width: 15%;
+  height: 12%;
+}
+
+.logos-container img {
   max-width: 60%;
   max-height: 60%;
   padding: 2%;
@@ -60,4 +87,5 @@ h2 {
   min-height: calc(100vh - 30px);
   max-height: calc(100vh - 30px);
   width: 100%;
+  z-index: 0;
 }
