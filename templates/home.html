@@ -28,10 +28,10 @@
       <div class="fires-container">
         {% for fire in fires %}
           <div class="fire-card orange lighten-4 z-depth-1">
-            <span class="fire-header">Informacion de Incendio en </br>{{ fire.cuarteles_afectados.nombre }}</br></span>
+            <span class="fire-header">Informacion de Incendio en </br><span>{{ fire.cuarteles_afectados.nombre }}</span></br></span>
             <ul class="fire-data">
               <li>Hora de Inicio: {{ fire.fecha_hora_inicio }} </li>
-              <li>Extension: {{ fire.radio }}</li>
+              <li>Extension: {{ fire.radio }} kms.</li>
               <li>Caracteristica: {{ fire.caracteristica }}</li>
               <li>Cuartel/es Afectado/s: {{ fire.cuarteles_afectados.nombre }}</li>
               <li>Estado: {{ fire.estado }}</li>
@@ -55,6 +55,52 @@
             </a>
           </div>
         </div>
+        <div class="menu-list">
+          <ul class="collapsible">
+            <li>
+              <div class="collapsible-header">Pronostico WRF</div>
+              <div class="collapsible-body">
+                <span>
+                  Pronostico del Observatorio Hidro-Metereologico de Cordoba
+                </span>
+                <a href="
+                https://wrf.ohmc.ar/pronosticos/CBA/localidad/cordoba-capital/
+                " target="blank">
+                  https://wrf.ohmc.ar/pronosticos/CBA/localidad/cordoba-capital/
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header">Alertas SMN</div>
+              <div class="collapsible-body">
+                <span>
+                  Servicio de Alertas Metereologicas provistas por el Servicio
+                  Metereologico Nacional
+                </span>
+                <a href="https://www.smn.gob.ar/alertas">
+                  https://www.smn.gob.ar/alertas
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header">Windy</div>
+              <div class="collapsible-body">
+                <span>
+                  Informacion en tiempo real sobre vientos en la Provincia de Cordoba.
+                </span>
+                <a href="
+                https://www.windy.com/es/-Rachas-de-viento-gust?gust,-31.182,-63.776,8
+                ">
+                  https://www.windy.com/es/-Rachas-de-viento-gust?gust,-31.182,-63.776,8
+                </a
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header">Ayuda</div>
+              <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="logos-container">
         <img src="{% static 'img/logos/logo_planFuego.png' %}" alt="Plan Provincial de Manejo contra el Fuego">
@@ -66,6 +112,14 @@
     <script>
       $(function () {
         var mymap = L.map('cba-map');
+      });
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.collapsible');
+        var instances = M.Collapsible.init(elems, {
+          // specify options here
+        });
       });
     </script>
   </body>

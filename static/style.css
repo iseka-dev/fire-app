@@ -8,6 +8,18 @@ h2 {
   color: #006d59;
 }
 
+a {
+  overflow-wrap: break-word;
+}
+
+span span {
+    animation: blur 2s ease-out infinite;
+}
+
+.collapsible-header {
+  align-items: right;
+}
+
 .login-header-container {
   display: grid;
   grid-template-columns: 3fr 1fr;
@@ -61,7 +73,15 @@ h2 {
   direction: ltr;
 }
 
-.fire-header {}
+@keyframes blur {
+  from {
+    text-shadow:0px 0px 2px #fff,
+      0px 0px 2px #fff,
+      0px 2px 5px #fff,
+      0px 5px 10px red,
+      0px -5px 10px red;
+  }
+}
 
 .menu-container {
   position: absolute;
@@ -115,6 +135,12 @@ h2 {
 
 .fire-data li {
   font-size: 11pt;
+}
+
+.menu-list {
+  margin-top: 15%;
+  opacity: 80%;
+  direction: rtl;
 }
 
 #login-container {
