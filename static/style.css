@@ -97,8 +97,7 @@ span span {
 }
 
 .isolated-item {
-  margin-left: 6%;
-  margin-right: 6%;
+  margin-right: 10%;
 }
 
 .logos-container {
@@ -139,7 +138,7 @@ span span {
   position: absolute;
   margin-top: 8%;
   opacity: 70%;
-  width: 85%;
+  width: 80%;
   display: none;
 }
 
@@ -152,7 +151,15 @@ span span {
 }
 
 .collapsible-header {
-  color: white;
+  color: #b71c1c;
+}
+
+.styled-icon {
+  filter: invert();
+}
+
+.square-btn {
+  vertical-align: bottom !important;
 }
 
 #login-container {

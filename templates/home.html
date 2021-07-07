@@ -46,12 +46,15 @@
       <div class="menu-container">
         <div class="menu-header">
           <div class="isolated-item">
-            <a class="btn-floating btn-large waves-effect waves-light red" id="menu-btn" onclick="toggleFunction">
-              <i class="material-icons">local_fire_department</i>
+            <a class="btn-floating btn-large waves-effect waves-light white" id="menu-btn" onclick="toggleFunction">
+              <i class="material-icons" style="color:red">local_fire_department</i>
             </a>
           </div>
-          <div class="isolated-item username-box red z-depth-1">
-            <span class="username">
+          <!-- <div class="username-box isolated-item red z-depth-1 square-btn" id="menu-btn" onclick="toggleFunction">
+            <i class="material-icons styled-icon">local_fire_department</i>
+          </div> -->
+          <div class="isolated-item username-box white z-depth-1">
+            <span class="username" style="color: #f44336">
               Usuario: <b>{{ request.user.username }}</b>
             </span>
           </div>
@@ -59,7 +62,7 @@
         <div class="menu-list" id="menu-list-id">
           <ul class="collapsible">
             <li>
-              <div class="collapsible-header red">Pronostico WRF</div>
+              <div class="collapsible-header">Pronostico WRF</div>
               <div class="collapsible-body">
                 <span>
                   Pronostico del Observatorio Hidro-Metereologico de Cordoba
@@ -72,7 +75,7 @@
               </div>
             </li>
             <li>
-              <div class="collapsible-header red">Alertas SMN</div>
+              <div class="collapsible-header">Alertas SMN</div>
               <div class="collapsible-body">
                 <span>
                   Servicio de Alertas Metereologicas provistas por el Servicio
@@ -84,7 +87,7 @@
               </div>
             </li>
             <li>
-              <div class="collapsible-header red">Windy</div>
+              <div class="collapsible-header">Windy</div>
               <div class="collapsible-body">
                 <span>
                   Informacion en tiempo real sobre vientos en la Provincia de Cordoba.
@@ -97,7 +100,7 @@
               </div>
             </li>
             <li>
-              <div class="collapsible-header red darken-1">Ayuda</div>
+              <div class="collapsible-header">Ayuda</div>
               <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
             </li>
           </ul>
