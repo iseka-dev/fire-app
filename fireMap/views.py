@@ -13,5 +13,8 @@ class FireMap(TemplateView):
         if len(fires) > 0:
             context['bo'] = True
             context['fires'] = fires
-            context['fire_locations'] = serialize('geojson', fires)
+            context['fire_locations'] = serialize(
+                'geojson',
+                fires
+            )
         return context

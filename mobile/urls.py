@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .users import views as users_views
 
 
 urlpatterns = [
@@ -17,5 +18,15 @@ urlpatterns = [
         'informar_incendio',
         views.informar_incendio,
         name='informar_incendio'
+    ),
+    path(
+        'login',
+        users_views.user_login,
+        name='login'
+    ),
+    path(
+        'logout',
+        users_views.user_logout,
+        name='logout'
     ),
 ]
