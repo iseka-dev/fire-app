@@ -9,7 +9,6 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.decorators import login_required
 
 
-
 @require_POST
 @csrf_exempt
 @login_required
@@ -22,10 +21,8 @@ def token_auth(request):
 
 @require_POST
 @csrf_exempt
-@login_required
 def user_login(request):
     req = json.loads(request.body)
-    token = req.get('token')
     password = req.get('password')
     username = req.get('username')
     try:
