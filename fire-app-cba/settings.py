@@ -32,18 +32,22 @@ INSTALLED_APPS = [
     # 'channels',
     'django.contrib.admin',
     'django.contrib.auth',
+    'rest_framework.authtoken',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+    'corsheaders',
     'leaflet',
     'fireMap',
     'mobile',
+    'users'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -76,7 +80,7 @@ WSGI_APPLICATION = 'fire-app-cba.wsgi.application'
 
 # Channels
 
-# ASGI_APPLICATION = 'fire-app-cba.routing.application'
+ASGI_APPLICATION = 'fire-app-cba.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -136,6 +140,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 LOGIN_URL = 'login/'
 

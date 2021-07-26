@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from .models import Incendio
+from django.core.serializers import serialize
 
 
 class FireMap(TemplateView):
@@ -12,5 +13,8 @@ class FireMap(TemplateView):
         if len(fires) > 0:
             context['bo'] = True
             context['fires'] = fires
-            print(len(fires))
+            context['fire_locations'] = serialize(
+                'geojson',
+                fires
+            )
         return context

@@ -1,8 +1,17 @@
-from django.shortcuts import render
+import json
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.decorators import login_required
 
 
 @require_POST
 @csrf_exempt
+@login_required
 def token_auth(request):
     received_json_data = json.loads(request.body)
     token = received_json_data.get('token')
@@ -13,35 +22,18 @@ def token_auth(request):
 @require_POST
 @csrf_exempt
 def user_login(request):
-    received_json_data = json.loads(request.body)
-    token = received_json_data.get('token')
-    password = received_json_data.get('password')
-    device = received_json_data.get('device')
+    req = json.loads(request.body)
+    password = req.get('password')
+    username = req.get('username')
     try:
-        username = User.objects.get(email=email)
+        username = User.objects.get(username=username)
     except User.DoesNotExist:
         return JsonResponse({'Response': 'User not found'})
-    user_obj = UserProfile.objects.select_related(
-        'userpermissions').get(user=username)
-    user_role = user_obj.get_user_groups()
-    if device == 'desktop' and user_role == {'Seller'}:
-        return JsonResponse(
-            {'Response': 'You dont have permission to enter the platform.'}
-            )
-    elif device == 'desktop':
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            token, created = Token.objects.get_or_create(user=user)
-            data = ({'email': user.email, 'token': token.key})
-        else:
-            data = {'Response': 'Invalid login details supplied.'}
-    elif device == 'mobile':
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            token, created = Token.objects.get_or_create(user=user)
-            data = {'email': user.email, 'token': token.key}
-        else:
-            data = {'Response': 'Invalid login details supplied.'}
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        token, created = Token.objects.get_or_create(user=user)
+        data = ({'username': user.username, 'token': token.key})
     else:
         data = {'Response': 'Invalid login details supplied.'}
     return JsonResponse(data)
@@ -54,4 +46,5 @@ def user_logout(request):
     token = received_json_data.get('token')
     user = get_object_or_404(Token, key=token)
     user.delete()
+    logout(request)
     return JsonResponse({'Response': 'user logged out'})

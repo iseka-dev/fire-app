@@ -6,7 +6,7 @@ from rest_framework.authtoken.models import Token
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from fireMap.models import Incendio
-
+from users.models import UserProfile
 
 @require_POST
 @csrf_exempt
@@ -14,6 +14,7 @@ def status_cuartel(request):
     received_json = json.loads(request.body)
     token = received_json.get('token')
     user = get_object_or_404(Token, key=token).user
+    user = UserProfile.objects.get(user=user)
     cuartel = user.cuartel
     if cuartel.fuego_activo is True:
         color = '#F7B902'
@@ -34,6 +35,7 @@ def confirmar_incendio(request):
     received_json = json.loads(request.body)
     token = received_json.get('token')
     user = get_object_or_404(Token, key=token).user
+    user = UserProfile.objects.get(user=user)
     cuartel = user.cuartel
     if received_json.get('falso_positivo') is True:
         return JsonResponse(
@@ -65,6 +67,7 @@ def informar_incendio(request):
     received_json = json.loads(request.body)
     token = received_json.get('token')
     user = get_object_or_404(Token, key=token).user
+    user = UserProfile.objects.get(user=user)
     cuartel = user.cuartel
     params = {
         'coordenadas': received_json.get('coordenadas'),

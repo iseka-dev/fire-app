@@ -165,7 +165,7 @@ span span {
   grid-template-columns: 1fr 1fr;
 }
 
-#cba-map {
+#cba {
   min-height: calc(100vh - 30px);
   max-height: calc(100vh - 30px);
   width: 100%;

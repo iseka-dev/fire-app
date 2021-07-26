@@ -24,7 +24,7 @@
     <div class="full-map">
     {% endif %}
       <div>
-        {% leaflet_map "cba" %}
+        {% leaflet_map "cba" callback="window.addMarkers" %}
       </div>
       <div class="fires-container">
         {% for fire in fires %}
@@ -125,6 +125,31 @@
           $("#menu-list-id").toggle();
         });
       });
+    </script>
+    <script>
+      function addMarkers (map, options) {
+
+        var fire_points = {{ fire_locations | safe }}
+
+        var da_flame = L.icon({
+          iconUrl: "{% static 'img/fire-icon.png' %}",
+          iconSize: [60, 60], // size of the icon
+          iconAnchor: [34, 58],
+          popupAnchor: [12,-90]
+        });
+
+        function onEachFeature(feature, layer) {
+          // does this feature have a property named popupContent?
+          // if (feature.properties && feature.properties.popupContent) {
+          //  layer.bindPopup(feature.properties.popupContent);
+          // }
+          layer.setIcon(da_flame)
+        }
+
+        var p = L.geoJSON(fire_points, {
+          onEachFeature: onEachFeature
+        }).addTo(map);
+      };
     </script>
   </body>
 </html>
