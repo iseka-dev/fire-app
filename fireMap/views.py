@@ -1,7 +1,8 @@
-from django.shortcuts import render
 from django.views.generic import TemplateView
 from .models import Incendio
 from django.core.serializers import serialize
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 
 
 class FireMap(TemplateView):
@@ -18,3 +19,10 @@ class FireMap(TemplateView):
                 fires
             )
         return context
+
+
+@csrf_exempt
+def fires(request):
+    fires = Incendio.objects.filter(activo=True)
+    fires = serialize('geojson', fires)
+    return JsonResponse({'fires': fires})

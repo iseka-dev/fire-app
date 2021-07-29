@@ -51,8 +51,8 @@ def confirmar_incendio(request):
     else:
         params = {
             'coordenadas': Point(
-                received_json.get('coordenadas')['latitude'],
-                received_json.get('coordenadas')['longitude']
+                received_json.get('coordenadas')['longitude'],
+                received_json.get('coordenadas')['latitude']
             ),
             'radio': received_json.get('radio'),
             'riesgo_interfase': received_json.get('riesgo_interfase'),
@@ -80,8 +80,8 @@ def informar_incendio(request):
     print('aaaaaaaaaaaaaa')
     params = {
         'coordenadas': Point(
-            received_json.get('coordenadas')['latitude'],
-            received_json.get('coordenadas')['longitude']
+            received_json.get('coordenadas')['longitude'],
+            received_json.get('coordenadas')['latitude']
         ),
         'radio': received_json.get('radio'),
         'riesgo_interfase': received_json.get('riesgo_interfase'),
@@ -93,6 +93,7 @@ def informar_incendio(request):
         'unid_livianas_afectadas': received_json.get(
             'unid_livianas_afectadas'
         ),
+        'activo': True
     }
     incendio = Incendio(**params)
     incendio.save()
