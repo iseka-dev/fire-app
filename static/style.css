@@ -54,8 +54,8 @@ span span {
 .fires-container {
   position: absolute;
   z-index: 10;
-  right: 4%;
-  top: 8%;
+  right: 2%;
+  top: 3%;
   width: 20%;
   max-height: 75%;
   overflow-y: auto;
@@ -84,8 +84,8 @@ span span {
 .menu-container {
   position: absolute;
   z-index: 10;
-  left: 8%;
-  top: 8%;
+  left: 3%;
+  top: 3%;
   width: 20%;
 }
 
@@ -114,6 +114,26 @@ span span {
 }
 
 .logos-container img {
+  max-width: 60%;
+  max-height: 60%;
+  padding: 2%;
+}
+
+.logos-container-map {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 2%;
+  z-index: 10;
+  right: 5%;
+  bottom: 3%;
+  width: 15%;
+  height: 12%;
+  padding: 5px;
+}
+
+.logos-container-map img {
   max-width: 60%;
   max-height: 60%;
   padding: 2%;
