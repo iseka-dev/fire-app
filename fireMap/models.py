@@ -13,7 +13,7 @@ class Cuartel(models.Model):
 
 class Incendio(models.Model):
 
-    ESTADO = {
+    TIPOS_ESTADO = {
         'EN CURSO',
         'CONTROLADO',
         'CONTENIDO',
@@ -22,7 +22,7 @@ class Incendio(models.Model):
         'REINICIO',
     }
 
-    CARACTERISTICA = {
+    TIPOS_CARACTERISTICA = {
         '10-10 - INCENDIO FORESTAL',
         '10-11 - INCENDIO DE VALDIO',
         '10-12 - INCENDIO DE QUINCHO',
@@ -38,15 +38,15 @@ class Incendio(models.Model):
     coordenadas = models.PointField(blank=True, null=True)
     estado = models.CharField(max_length=50)
     caracteristica = models.CharField(max_length=50)
-    fecha_hora_inicio = models.DateTimeField()  # empty field?
+    fecha_hora_inicio = models.DateTimeField(null=True, blank=True)  # empty field?
     # fecha_hora_extincion = models.DateTimeField(blank=True, null=True)
     radio = models.FloatField()  # extent
     cuarteles_afectados = models.ForeignKey(
         Cuartel,
         on_delete=models.RESTRICT
     )
-    bomberos_afectados = models.IntegerField()
-    unid_livianas_afectadas = models.IntegerField()
-    unid_pesadas_afectadas = models.IntegerField()
-    activo = models.BooleanField() # marcador para mapa
-    riesgo_interfase = models.BooleanField()
+    bomberos_afectados = models.IntegerField(null=True, blank=True)
+    unid_livianas_afectadas = models.IntegerField(null=True, blank=True)
+    unid_pesadas_afectadas = models.IntegerField(null=True, blank=True)
+    activo = models.BooleanField(null=True, blank=True)  # marcador para mapa
+    riesgo_interfase = models.BooleanField(null=True, blank=True)

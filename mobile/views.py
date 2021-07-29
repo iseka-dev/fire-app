@@ -7,6 +7,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from fireMap.models import Incendio
 from users.models import UserProfile
+from django.contrib.gis.geos import Point
+from django.utils import timezone
+
 
 @require_POST
 @csrf_exempt
@@ -37,6 +40,7 @@ def confirmar_incendio(request):
     user = get_object_or_404(Token, key=token).user
     user = UserProfile.objects.get(user=user)
     cuartel = user.cuartel
+    print(received_json.get('coordenadas'))
     if received_json.get('falso_positivo') is True:
         return JsonResponse(
             {
@@ -46,7 +50,10 @@ def confirmar_incendio(request):
         )
     else:
         params = {
-            'coordenadas': received_json.get('coordenadas'),
+            'coordenadas': Point(
+                received_json.get('coordenadas')['latitude'],
+                received_json.get('coordenadas')['longitude']
+            ),
             'radio': received_json.get('radio'),
             'riesgo_interfase': received_json.get('riesgo_interfase'),
             'cuarteles_afectados': cuartel
@@ -69,8 +76,13 @@ def informar_incendio(request):
     user = get_object_or_404(Token, key=token).user
     user = UserProfile.objects.get(user=user)
     cuartel = user.cuartel
+    print(received_json.get('caracteristica'))
+    print('aaaaaaaaaaaaaa')
     params = {
-        'coordenadas': received_json.get('coordenadas'),
+        'coordenadas': Point(
+            received_json.get('coordenadas')['latitude'],
+            received_json.get('coordenadas')['longitude']
+        ),
         'radio': received_json.get('radio'),
         'riesgo_interfase': received_json.get('riesgo_interfase'),
         'cuarteles_afectados': cuartel,
