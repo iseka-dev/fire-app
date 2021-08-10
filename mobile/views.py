@@ -19,9 +19,13 @@ def status_cuartel(request):
     user = get_object_or_404(Token, key=token).user
     user = UserProfile.objects.get(user=user)
     cuartel = user.cuartel
-    if cuartel.fuego_activo is True:
+    if (
+        cuartel.fuego_activo is True
+    ) and (
+        Incendio.objects.filter(cuarteles_afectados=cuartel).exists()
+    ):
         color = '#F7B902'
-    elif cuartel.fuego_activo is False:
+    else:
         if Cuartel.objects.filter(
             fuego_activo=True,
             cuarteles_limitrofes=cuartel,
@@ -39,8 +43,12 @@ def confirmar_incendio(request):
     token = received_json.get('token')
     user = get_object_or_404(Token, key=token).user
     user = UserProfile.objects.get(user=user)
-    cuartel = user.cuartel
-    print(received_json.get('coordenadas'))
+    coord = Point(
+        received_json.get('coordenadas')['longitude'],
+        received_json.get('coordenadas')['latitude']
+    )
+    # cuartel = user.cuartel
+    cuartel = Cuartel.objects.get(jurisdiccion__contains=coord)
     if received_json.get('falso_positivo') is True:
         return JsonResponse(
             {
@@ -56,7 +64,8 @@ def confirmar_incendio(request):
             ),
             'radio': received_json.get('radio'),
             'riesgo_interfase': received_json.get('riesgo_interfase'),
-            'cuarteles_afectados': cuartel
+            'cuarteles_afectados': cuartel,
+            'activo': True
         }
     incendio = Incendio(**params)
     incendio.save()
@@ -75,14 +84,14 @@ def informar_incendio(request):
     token = received_json.get('token')
     user = get_object_or_404(Token, key=token).user
     user = UserProfile.objects.get(user=user)
-    cuartel = user.cuartel
-    print(received_json.get('caracteristica'))
-    print('aaaaaaaaaaaaaa')
+    # cuartel = user.cuartel ----> En esta opcion el cuartel se determina por el usuario que carga desde el celular.
+    coord = Point(
+        received_json.get('coordenadas')['longitude'],
+        received_json.get('coordenadas')['latitude']
+    )
+    cuartel = Cuartel.objects.get(jurisdiccion__contains=coord)
     params = {
-        'coordenadas': Point(
-            received_json.get('coordenadas')['longitude'],
-            received_json.get('coordenadas')['latitude']
-        ),
+        'coordenadas': coord,
         'radio': received_json.get('radio'),
         'riesgo_interfase': received_json.get('riesgo_interfase'),
         'cuarteles_afectados': cuartel,
@@ -97,6 +106,10 @@ def informar_incendio(request):
     }
     incendio = Incendio(**params)
     incendio.save()
+
+    cuartel.fuego_activo = True
+    cuartel.save()
+
     return JsonResponse(
         {
             'Response':
