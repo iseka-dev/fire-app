@@ -1,15 +1,14 @@
 from django.contrib.gis.db import models
 from django.contrib.auth.models import User
+from django.forms import ModelForm
+from django import forms
 
 
 class Cuartel(models.Model):
     nombre = models.CharField(max_length=50, unique=True)
-    jurisdiccion = models.MultiPolygonField(blank=True, null=True, srid=4326)
+    jurisdiccion = models.PolygonField(blank=True, null=True)
     cuarteles_limitrofes = models.ManyToManyField('self', blank=True)
-    fuego_activo = models.BooleanField(default=False, null=True, blank=True)
-
-    def __str__(self):
-        return self.nombre
+    fuego_activo = models.BooleanField()
 
 
 class Incendio(models.Model):
@@ -42,18 +41,12 @@ class Incendio(models.Model):
     fecha_hora_inicio = models.DateTimeField(null=True, blank=True)  # empty field?
     # fecha_hora_extincion = models.DateTimeField(blank=True, null=True)
     radio = models.FloatField()  # extent
-    cuarteles_afectados = models.ManyToManyField(
+    cuarteles_afectados = models.ForeignKey(
         Cuartel,
-        blank=True
+        on_delete=models.RESTRICT
     )
     bomberos_afectados = models.IntegerField(null=True, blank=True)
     unid_livianas_afectadas = models.IntegerField(null=True, blank=True)
     unid_pesadas_afectadas = models.IntegerField(null=True, blank=True)
     activo = models.BooleanField(null=True, blank=True)  # marcador para mapa
     riesgo_interfase = models.BooleanField(null=True, blank=True)
-
-    def __str__(self):
-        if self.cuarteles_afectados is not None:
-            return self.cuarteles_afectados.nombre + " - " + self.caracteristica
-        else:
-            return self.caracteristica
