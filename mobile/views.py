@@ -24,13 +24,13 @@ def status_cuartel(request):
     ) and (
         Incendio.objects.filter(cuarteles_afectados=cuartel).exists()
     ):
-        color = '#F7B902'
+        color = '#fc3b2d'
     else:
         if Cuartel.objects.filter(
             fuego_activo=True,
             cuarteles_limitrofes=cuartel,
         ):
-            color = '#F30202'
+            color = '#f0a418'
         else:
             color = '#8fd9a8'
     return JsonResponse({'color': color})
@@ -64,11 +64,15 @@ def confirmar_incendio(request):
             ),
             'radio': received_json.get('radio'),
             'riesgo_interfase': received_json.get('riesgo_interfase'),
-            'cuarteles_afectados': cuartel,
             'activo': True
         }
     incendio = Incendio(**params)
     incendio.save()
+    incendio.cuarteles_afectados.set([cuartel])
+
+    cuartel.fuego_activo = True
+    cuartel.save()
+
     return JsonResponse(
         {
             'Response':
@@ -94,7 +98,6 @@ def informar_incendio(request):
         'coordenadas': coord,
         'radio': received_json.get('radio'),
         'riesgo_interfase': received_json.get('riesgo_interfase'),
-        'cuarteles_afectados': cuartel,
         'estado': received_json.get('estado'),
         'caracteristica': received_json.get('caracteristica'),
         'bomberos_afectados': received_json.get('bomberos_afectados'),
@@ -105,7 +108,7 @@ def informar_incendio(request):
         'activo': True
     }
     incendio = Incendio(**params)
-    incendio.save()
+    incendio.cuarteles_afectados.set(cuartel)
 
     cuartel.fuego_activo = True
     cuartel.save()

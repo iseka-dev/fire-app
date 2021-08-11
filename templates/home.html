@@ -139,12 +139,9 @@
       });
     </script>
     <script>
+      let fire_points = {{ fire_locations | safe }}
+
       function addMarkers (map, options) {
-
-        var fire_points = {{ fire_locations | safe }}
-
-        console.log(fire_points)
-
         var da_flame = L.icon({
           iconUrl: "{% static 'img/fire-icon.png' %}",
           iconSize: [60, 60], // size of the icon
@@ -161,7 +158,7 @@
           layer.bindTooltip(
             "Estado: " + feature.properties.estado +
             "<br>Caracteristica: " + feature.properties.caracteristica +
-            "<br>Cuartel/es Afectado/s: " + feature.properties.cuarteles_afectados.nombre +
+            // "<br>Cuartel/es Afectado/s: " + feature.properties.cuarteles_afectados +
             "<br>Bomberos: " + feature.properties.bomberos_afectados +
             "<br>Unidades Livianas: " + feature.properties.unid_livianas_afectadas +
             "<br>Unidades Pesadas: " + feature.properties.unid_pesadas_afectadas
@@ -171,8 +168,23 @@
         var p = L.geoJSON(fire_points, {
           onEachFeature: onEachFeature
         }).addTo(map);
+        map.flyToBounds(p.getBounds(), { 'maxZoom': 9, 'padding': [50,50]});
       };
-      setInterval(addMarkers, 5000);
+
+      function checkNewMarkers () {
+        $.ajax({
+          url: 'fires',
+          type: 'get',
+          success: function(data) {
+            console.log(data);
+          },
+          failure: function(data) {
+            alert('Got an error dude');
+          }
+        });
+      };
+
+      setInterval(checkNewMarkers, 5000);
     </script>
   </body>
 </html>

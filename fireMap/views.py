@@ -48,7 +48,6 @@ def load_cuarteles(request):
     )
     lm.save(verbose=True, strict=True)
     cuarteles = Cuartel.objects.all()
-    len(cuarteles)
     for cuartel in cuarteles:
         fig = cuartel.jurisdiccion
         lims = Cuartel.objects.filter(jurisdiccion__touches=fig)

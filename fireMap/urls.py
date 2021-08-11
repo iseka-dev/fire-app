@@ -17,4 +17,8 @@ urlpatterns = [
             login_url='../login'
         )
     ),
+    path(
+        'fires/',
+        views.fires
+    ),
 ]
