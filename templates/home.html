@@ -29,15 +29,15 @@
       <div class="fires-container">
         {% for fire in fires %}
           <div class="fire-card orange lighten-4 z-depth-1">
-            <span class="fire-header">Informacion de Incendio en </br><span>{{ fire.cuarteles_afectados.nombre }}</span></br></span>
+            <span class="fire-header">Informacion de Incendio en </br><span>{{ fire.coordenadas }}</span></br></span>
             <ul class="fire-data">
-              <li>Hora de Inicio: {{ fire.fecha_hora_inicio }} </li>
-              <li>Extension: {{ fire.radio }} kms.</li>
+              <!-- <li>Hora de Inicio: {{ fire.fecha_hora_inicio }} </li> -->
+              <li>Extension: {{ fire.radio }} ha</li>
               <li>Caracteristica: {{ fire.caracteristica }}</li>
               <li>Cuartel/es Afectado/s: {{ fire.cuarteles_afectados.nombre }}</li>
               <li>Estado: {{ fire.estado }}</li>
               <li>Bomberos: {{ fire.bomberos_afectados }} </li>
-              <li>Unindades Livianas: {{ fire.unid_livianas_afectadas }} </li>
+              <li>Unidades Livianas: {{ fire.unid_livianas_afectadas }} </li>
               <li>Unidades Pesadas: {{ fire.unid_pesadas_afectadas }}</li>
             </ul>
           </div>
@@ -134,6 +134,8 @@
 
         var fire_points = {{ fire_locations | safe }}
 
+        console.log(fire_points)
+
         var da_flame = L.icon({
           iconUrl: "{% static 'img/fire-icon.png' %}",
           iconSize: [60, 60], // size of the icon
@@ -147,12 +149,21 @@
           //  layer.bindPopup(feature.properties.popupContent);
           // }
           layer.setIcon(da_flame)
+          layer.bindTooltip(
+            "Estado: " + feature.properties.estado +
+            "<br>Caracteristica: " + feature.properties.caracteristica +
+            "<br>Cuartel/es Afectado/s: " + feature.properties.cuarteles_afectados.nombre +
+            "<br>Bomberos: " + feature.properties.bomberos_afectados +
+            "<br>Unidades Livianas: " + feature.properties.unid_livianas_afectadas +
+            "<br>Unidades Pesadas: " + feature.properties.unid_pesadas_afectadas
+          );
         }
 
         var p = L.geoJSON(fire_points, {
           onEachFeature: onEachFeature
         }).addTo(map);
       };
+      setInterval(addMarkers, 5000);
     </script>
   </body>
 </html>

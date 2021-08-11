@@ -10,4 +10,11 @@ urlpatterns = [
             login_url='../login'
         )
     ),
+    path(
+        'load_cuarteles/',
+        login_required(
+            views.load_cuarteles,
+            login_url='../login'
+        )
+    ),
 ]
