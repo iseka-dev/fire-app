@@ -54,6 +54,9 @@ class Incendio(models.Model):
 
     def __str__(self):
         if self.cuarteles_afectados is not None:
-            return self.cuarteles_afectados.nombre + " - " + self.caracteristica
+            nombres_cuarteles = ""
+            for cuart in self.cuarteles_afectados.all():
+                nombres_cuarteles += f"{cuart.nombre} "
+            return self.caracteristica + " - " + nombres_cuarteles
         else:
             return self.caracteristica

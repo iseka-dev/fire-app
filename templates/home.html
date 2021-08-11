@@ -29,12 +29,21 @@
       <div class="fires-container">
         {% for fire in fires %}
           <div class="fire-card orange lighten-4 z-depth-1">
-            <span class="fire-header">Informacion de Incendio en </br><span>{{ fire.coordenadas }}</span></br></span>
+            <span class="fire-header">Informacion de Incendio en </br>
+              <span>
+                {% for crd in fire.coordenadas.coords %}
+                  {{ crd | floatformat:3 }} &ensp;
+                  {% endfor %}
+              </span>
+            </span>
             <ul class="fire-data">
               <!-- <li>Hora de Inicio: {{ fire.fecha_hora_inicio }} </li> -->
               <li>Extension: {{ fire.radio }} ha</li>
               <li>Caracteristica: {{ fire.caracteristica }}</li>
-              <li>Cuartel/es Afectado/s: {{ fire.cuarteles_afectados.nombre }}</li>
+              <li>Cuartel/es Afectado/s:
+                {% for cl in fire.cuarteles_afectados.all %}
+                  {{ cl.nombre }} </li>
+                {% endfor %}
               <li>Estado: {{ fire.estado }}</li>
               <li>Bomberos: {{ fire.bomberos_afectados }} </li>
               <li>Unidades Livianas: {{ fire.unid_livianas_afectadas }} </li>
