@@ -108,7 +108,8 @@ def informar_incendio(request):
         'activo': True
     }
     incendio = Incendio(**params)
-    incendio.cuarteles_afectados.set(cuartel)
+    incendio.save()
+    incendio.cuarteles_afectados.set([cuartel])
 
     cuartel.fuego_activo = True
     cuartel.save()

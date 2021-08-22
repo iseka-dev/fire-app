@@ -37,7 +37,7 @@
               </span>
             </span>
             <ul class="fire-data">
-              <!-- <li>Hora de Inicio: {{ fire.fecha_hora_inicio }} </li> -->
+              <li>Hora de Inicio: {{ fire.fecha_hora_inicio }} </li>
               <li>Extension: {{ fire.radio }} ha</li>
               <li>Caracteristica: {{ fire.caracteristica }}</li>
               <li>Cuartel/es Afectado/s:
@@ -170,13 +170,16 @@
         }).addTo(map);
         map.flyToBounds(p.getBounds(), { 'maxZoom': 9, 'padding': [50,50]});
       };
-
+    </script>
+    <script>
       function checkNewMarkers () {
         $.ajax({
           url: 'fires',
           type: 'get',
           success: function(data) {
-            console.log(data);
+            if (JSON.stringify(JSON.parse(data.fires)) !== JSON.stringify(fire_points)) {
+                location.reload();
+            }
           },
           failure: function(data) {
             alert('Got an error dude');
