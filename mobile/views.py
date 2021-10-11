@@ -14,6 +14,18 @@ from django.utils import timezone
 @require_POST
 @csrf_exempt
 def status_cuartel(request):
+    """
+    Funcion para determinar el background de la app mobile en funcion del nivel
+    de alarma de un cuartel.
+    Hay 3 posibles niveles de alarma:
+        - Bajo: No hay ningun incendio activo en la jurisdiccion, ni en
+                jurisdicciones vecinas. Se representa con el color verde.
+        - Medio: No hay incendios activos en la jurisdiccion, pero si en alguno
+                de los cuarteles limitrofes. Se representa con el color amarillo.
+        - Alto: Hay un incendio activo en la jurisdiccion que afecta al cuartel.
+                Se representa con el color rojo.
+    Toma un token y devuelve un color.
+    """
     received_json = json.loads(request.body)
     token = received_json.get('token')
     user = get_object_or_404(Token, key=token).user
@@ -39,6 +51,12 @@ def status_cuartel(request):
 @require_POST
 @csrf_exempt
 def confirmar_incendio(request):
+    """
+    Esta vista crea en la base de datos una instancia 'Incendio' con la
+    informacion proveniente de la app mobile.
+    Toma: token, coordenadas, falso_positivo, radio, riesgo_interfase, activo.
+    Devuelve: JsonResponse
+    """
     received_json = json.loads(request.body)
     token = received_json.get('token')
     user = get_object_or_404(Token, key=token).user
@@ -84,6 +102,14 @@ def confirmar_incendio(request):
 @require_POST
 @csrf_exempt
 def informar_incendio(request):
+    """
+    Esta vista crea en la base de datos una instancia 'Incendio' con la
+    informacion proveniente de la app mobile.
+    Recibe: token, coordenadas, falso_positivo, radio, riesgo_interfase, activo,
+    caracteristica, bomberos_afectados, unid?unid_pesadas_afectadas,
+    unid_livianas_afectadas
+    Devuelve: JsonResponse
+    """
     received_json = json.loads(request.body)
     token = received_json.get('token')
     user = get_object_or_404(Token, key=token).user
@@ -97,6 +123,7 @@ def informar_incendio(request):
     params = {
         'coordenadas': coord,
         'radio': received_json.get('radio'),
+        'fecha_hora_inicio': timezone.now(),
         'riesgo_interfase': received_json.get('riesgo_interfase'),
         'estado': received_json.get('estado'),
         'caracteristica': received_json.get('caracteristica'),

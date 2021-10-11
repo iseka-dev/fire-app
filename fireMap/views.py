@@ -12,6 +12,9 @@ from django.contrib.gis.utils import LayerMapping
 
 
 class FireMap(TemplateView):
+    """
+    Vista principal que devuelve los elementos del mapa de incendios
+    """
     template_name = "../templates/home.html"
 
     def get_context_data(self, **kwargs):
@@ -29,6 +32,9 @@ class FireMap(TemplateView):
 
 @csrf_exempt
 def fires(request):
+    """
+    Metodo GET que devuelve un GeoJson con todos los incendios activos
+    """
     fires = Incendio.objects.filter(activo=True)
     fires = serialize('geojson', fires)
     return JsonResponse({'fires': fires})
@@ -36,6 +42,10 @@ def fires(request):
 
 @csrf_exempt
 def load_cuarteles(request):
+    """
+    Metodo GET que carga cada Base de datos con los cuarteles, sus poligonos
+    y cuarteles limitrofes.
+    """
     mapping_cuartel = {
         'jurisdiccion': 'POLYGON',
         'nombre': 'Cuartel'
