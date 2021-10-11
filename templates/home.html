@@ -1,0 +1,205 @@
+{% load static %}
+{% load leaflet_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Mapa de Incendios en la Provincia de Cordoba</title>
+    <link rel="stylesheet" type="text/css" href="{% static '../static/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript for Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </head>
+  <body>
+    {% if bo %}
+    <div class="full-map-alert">
+    {% else %}
+    <div class="full-map">
+    {% endif %}
+      <div>
+        {% leaflet_map "cba" callback="window.addMarkers" %}
+      </div>
+      <div class="fires-container">
+        {% for fire in fires %}
+          <div class="fire-card orange lighten-4 z-depth-1">
+            <span class="fire-header">Informacion de Incendio en </br>
+              <span>
+                {% for crd in fire.coordenadas.coords %}
+                  {{ crd | floatformat:3 }} &ensp;
+                  {% endfor %}
+              </span>
+            </span>
+            <ul class="fire-data">
+              <li>Hora de Inicio: {{ fire.fecha_hora_inicio }} </li>
+              <li>Extension: {{ fire.radio }} ha</li>
+              <li>Caracteristica: {{ fire.caracteristica }}</li>
+              <li>Cuartel/es Afectado/s:
+                {% for cl in fire.cuarteles_afectados.all %}
+                  {{ cl.nombre }} </li>
+                {% endfor %}
+              <li>Estado: {{ fire.estado }}</li>
+              <li>Bomberos: {{ fire.bomberos_afectados }} </li>
+              <li>Unidades Livianas: {{ fire.unid_livianas_afectadas }} </li>
+              <li>Unidades Pesadas: {{ fire.unid_pesadas_afectadas }}</li>
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="menu-container">
+        <div class="menu-header">
+          <div class="isolated-item">
+            <a class="btn-floating btn-large waves-effect waves-light red" id="menu-btn" onclick="toggleFunction">
+              <i class="material-icons">local_fire_department</i>
+            </a>
+          </div>
+          <!-- <div class="username-box isolated-item red z-depth-1 square-btn" id="menu-btn" onclick="toggleFunction">
+            <i class="material-icons styled-icon">local_fire_department</i>
+          </div> -->
+          <div class="isolated-item username-box red z-depth-1">
+            <span class="username">
+              Usuario: <b>{{ request.user.username }}</b>
+            </span>
+          </div>
+        </div>
+        <div class="menu-list" id="menu-list-id">
+          <ul class="collapsible">
+            <li>
+              <div class="collapsible-header">Pronostico WRF</div>
+              <div class="collapsible-body">
+                <span>
+                  Pronostico del Observatorio Hidro-Metereologico de Cordoba
+                </span>
+                <a href="
+                https://wrf.ohmc.ar/pronosticos/CBA/localidad/cordoba-capital/
+                " target="blank">
+                  https://wrf.ohmc.ar/pronosticos/CBA/localidad/cordoba-capital/
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header">Alertas SMN</div>
+              <div class="collapsible-body">
+                <span>
+                  Servicio de Alertas Metereologicas provistas por el Servicio
+                  Metereologico Nacional
+                </span>
+                <a href="https://www.smn.gob.ar/alertas">
+                  https://www.smn.gob.ar/alertas
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header">Windy</div>
+              <div class="collapsible-body">
+                <span>
+                  Informacion en tiempo real sobre vientos en la Provincia de Cordoba.
+                </span>
+                <a href="
+                https://www.windy.com/es/-Rachas-de-viento-gust?gust,-31.182,-63.776,8
+                ">
+                  https://www.windy.com/es/-Rachas-de-viento-gust?gust,-31.182,-63.776,8
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header">Ayuda</div>
+              <div class="collapsible-body">
+                <span>
+                  <b>Mapa de Emergencias</b><br>
+                  En el mapa se muestran todos los eventos activos sobre los cuales trabajan uno o mas cuarteles de bomberos.<br><br>
+                  <b>Menu de Incendios</b><br>
+                  Sobre el costado derecho de la pantalla se situan tarjetas correspondientes a cada uno de los eventos
+                  activos que se muestran en el mapa, con informacion correspondiente.<br><br>
+                  <b>Menu Informativo:</b><br>
+                  Sobre el costado izquierdo de la pantalla esta el menu de incendios, al cual se accede con el boton
+                  circular rojo, y que contiene enlaces a informacion relacionada. Asimismo el boton cuadrado rojo indica
+                  el usuario logueado.<br><br>
+                </span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="logos-container-map">
+        <img src="{% static 'img/logos/logo_planFuego.png' %}" alt="Plan Provincial de Manejo contra el Fuego">
+        <img src="{% static 'img/logos/logo_secretaria.png' %}" alt="Secreataria Catastrofes">
+        <img src="{% static 'img/logos/logo_gobCBA.png' %}" alt="Gobierno de Cordoba">
+        <img src="{% static 'img/logos/ppmf.png' %}" alt="Plan Provincial de Manejo contra el Fuego2">
+      </div>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.collapsible');
+        var instances = M.Collapsible.init(elems, {
+        });
+      });
+    </script>
+    <script>
+    </script>
+    <script>
+      $(document).ready(function(){
+        $("#menu-btn").click(function() {
+          $("#menu-list-id").toggle();
+        });
+      });
+    </script>
+    <script>
+      let fire_points = {{ fire_locations | safe }}
+
+      function addMarkers (map, options) {
+        var da_flame = L.icon({
+          iconUrl: "{% static 'img/fire-icon.png' %}",
+          iconSize: [60, 60], // size of the icon
+          iconAnchor: [34, 58],
+          popupAnchor: [12,-90]
+        });
+
+        function onEachFeature(feature, layer) {
+          // does this feature have a property named popupContent?
+          // if (feature.properties && feature.properties.popupContent) {
+          //  layer.bindPopup(feature.properties.popupContent);
+          // }
+          layer.setIcon(da_flame)
+          layer.bindTooltip(
+            "Estado: " + feature.properties.estado +
+            "<br>Caracteristica: " + feature.properties.caracteristica +
+            // "<br>Cuartel/es Afectado/s: " + feature.properties.cuarteles_afectados +
+            "<br>Bomberos: " + feature.properties.bomberos_afectados +
+            "<br>Unidades Livianas: " + feature.properties.unid_livianas_afectadas +
+            "<br>Unidades Pesadas: " + feature.properties.unid_pesadas_afectadas
+          );
+        }
+
+        var p = L.geoJSON(fire_points, {
+          onEachFeature: onEachFeature
+        }).addTo(map);
+        map.flyToBounds(p.getBounds(), { 'maxZoom': 9, 'padding': [50,50]});
+      };
+    </script>
+    <script>
+      function checkNewMarkers () {
+        $.ajax({
+          url: 'fires',
+          type: 'get',
+          success: function(data) {
+            if (JSON.stringify(JSON.parse(data.fires)) !== JSON.stringify(fire_points)) {
+                location.reload();
+            }
+          },
+          failure: function(data) {
+            alert('Got an error dude');
+          }
+        });
+      };
+
+      setInterval(checkNewMarkers, 5000);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static '../static/style.css' %}">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Login</title>
+    <meta name="author" content="Horacio Chiarella">
+    <meta name="description" content="login page">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript for Materialize CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </head>
+  <body style="background-image: url({% static 'img/monteseco.png' %}); background-repeat: no-repeat; background-size: cover;">
+    <div class="container">
+      <header>
+        <div class="login-header-container">
+          <h2>Incendios Forestales V1.1</h2>
+          <div id="logos-container-login">
+          </div>
+        </div>
+      </header>
+      <br clear="all">
+      <div id="login-container">
+        <form id="login-form" method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="waves-effect waves-light btn">Iniciar Sesion</button>
+        </form>
+      </div>
+      <div class="logos-container">
+        <img src="{% static 'img/logos/logo_planFuego.png' %}" alt="Plan Provincial de Manejo contra el Fuego">
+        <img src="{% static 'img/logos/logo_secretaria.png' %}" alt="Secreataria Catastrofes">
+        <img src="{% static 'img/logos/logo_gobCBA.png' %}" alt="Gobierno de Cordoba">
+        <img src="{% static 'img/logos/ppmf.png' %}" alt="Plan Provincial de Manejo contra el Fuego2">
+      </div>
+    </div>
+  </body>
+</html>
