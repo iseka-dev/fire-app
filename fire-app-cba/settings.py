@@ -148,7 +148,7 @@ LOGIN_URL = 'login/'
 LOGIN_REDIRECT_URL = '../'
 
 LEAFLET_CONFIG = {
-    'SPATIAL_EXTENT': (-66, -35, -62, -30),
+    'SPATIAL_EXTENT': (-66, -35, -60, -29),
     'DEFAULT_CENTER': (-64.11, -31.25),
     'DEFAULT_ZOOM': 8,
     'MIN_ZOOM': 3,
